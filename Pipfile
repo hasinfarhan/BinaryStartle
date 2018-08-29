@@ -7,9 +7,11 @@ name = "pypi"
 
 [packages]
 
-Django = "*"
+django = "*"
 gunicorn = "*"
 django-heroku = "*"
+google-api-python-client = "*"
+"oauth2client" = "*"
 
 
 [dev-packages]
