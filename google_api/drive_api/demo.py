@@ -1,8 +1,9 @@
 from googleapiclient.discovery import build
 from httplib2 import Http
 from oauth2client import file, client, tools
-from apiclient.http import MediaFileUpload
+from apiclient.http import MediaFileUpload, MediaIoBaseDownload
 
+import io
 
 
 class DriveApi:
@@ -21,4 +22,15 @@ class DriveApi:
         results = self.service.files().list(q="name='hello.txt'").execute()
         items = results.get('files', [])
         file_id = items[0].get('id')
-        return file_id
+
+        request = self.service.files().get_media(fileId=file_id)
+        fh = io.FileIO('google_api/drive_api/demoTEMP.txt',mode='wb')
+        downloader = MediaIoBaseDownload(fh, request)
+        done = False
+        while done is False:
+            status, done=downloader.next_chunk()
+            
+        tempfile=open('google_api/drive_api/demoTEMP.txt',mode='rb')
+        data=tempfile.read()
+        tempfile.close()
+        return data
