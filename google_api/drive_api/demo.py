@@ -29,8 +29,14 @@ class DriveApi:
         done = False
         while done is False:
             status, done=downloader.next_chunk()
-            
+
         tempfile=open('google_api/drive_api/demoTEMP.txt',mode='rb')
-        data=tempfile.read()
+        data=""
+
+        for line in tempfile:
+            data+=line.decode("utf-8")
+            print(line.decode("utf-8"))
+            data+="<br>"
+
         tempfile.close()
         return data
