@@ -35,8 +35,6 @@ class DriveApi:
 
         for line in tempfile:
             data+=line.decode("utf-8")
-            print(line.decode("utf-8"))
-            data+="<br>"
 
         tempfile.close()
-        return data
+        return data.split('\n')

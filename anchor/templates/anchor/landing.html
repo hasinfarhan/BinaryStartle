@@ -1,0 +1,18 @@
+{% extends 'anchor/base.html' %}
+
+{% block landing %}
+
+<h1>Hi, there! </h1>
+
+
+<img src="/static/anchor/img/BSicon.jpg"  style="width:160px;height:140px;">
+<br />
+<br />
+
+
+{% for i in content_0 %}
+    {{i}}
+    <br/>
+{% endfor %}
+
+{% endblock %}

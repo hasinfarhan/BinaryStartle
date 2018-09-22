@@ -12,6 +12,7 @@ gunicorn = "*"
 django-heroku = "*"
 google-api-python-client = "*"
 "oauth2client" = "*"
+"jinja2" = "*"
 
 
 [dev-packages]
