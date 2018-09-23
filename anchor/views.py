@@ -7,5 +7,5 @@ from django.conf import settings
 
 def index(request):
     gdrive=DriveApi()
-    content=gdrive.basicDownload('hello.txt').split('\n')
+    content=gdrive.basicDownloadToString('hello.txt').split('\n')
     return render(request,'anchor/landing.html',{'content_0':content})
