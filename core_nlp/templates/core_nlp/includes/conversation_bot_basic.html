@@ -1,0 +1,56 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <form role="form-inline" method="post" novalidate>
+
+
+        {% csrf_token %}
+        <div class="row">
+
+          <div class="col-md-6">
+            You:
+            <div class="form-group" data-toggle="tooltip" title="Say Anything">
+              {{basic_bot_conversation_form.usertext}}
+              <p class="help-block text-danger"></p>
+              <div class="col-md-10 col-lg-8 col-xl-8 mx-auto">
+                <div class="col-lg-12 text-center">
+                  <div class="btn-group">
+                    <div class="col-xs-4">
+                      <button class="btn btn-outline-info btn-sm" type="submit" style="width:150px" formaction="#">Say</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-6">
+              Pok:
+              <div class="form-group">
+                {{basic_bot_conversation_form.bottext}}
+                <p class="help-block text-danger"></p>
+              </div>
+          </div>
+
+        </div>
+
+      </form>
+
+      <font color="red">
+      {% if basic_bot_conversation_form.non_field_errors %}
+        <ul class='form-errors'>
+            {% for error in basic_bot_conversation_form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+      </font>
+
+
+    </div>
+  </div>
+
+
+</div>
