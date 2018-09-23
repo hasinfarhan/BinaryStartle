@@ -4,4 +4,5 @@ from django.conf.urls import url,include
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('anchor.urls')),
+    url(r'^core_nlp', include('core_nlp.urls')),
 ]
