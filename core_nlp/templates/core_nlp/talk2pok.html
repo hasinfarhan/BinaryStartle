@@ -1,0 +1,42 @@
+{% extends 'anchor/base.html' %}
+
+{% block generalcontent %}
+
+<div class="col">
+    <ul>
+      <li>
+        <a href="{% if request.session.basicid%}/core_nlp/talk2pok_profile{% else %}/core_nlp/login_signup{% endif %}"\>{% if request.session.basicid%} Profile Info {% else %} Log In/Sign Up {% endif %}</a>
+    </li>
+      {% if request.session.basicid%}
+      <li>
+        <a href="/core_nlp/chathistory"\>Chat history</a>
+      </li>
+      <!--<li>
+        <a href="/core_nlp"\>Analytics</a>
+    </li>-->
+    {% endif %}
+      <li>
+        <a href="/core_nlp/talk2pok_faq"\>FAQ</a>
+      </li>
+    {% if request.session.basicid%}
+     <li>
+       <a href="/core_nlp/logout"\>Logout</a>
+     </li>
+    {% endif %}
+    </ul>
+</div>
+
+
+<div class="row">
+  <div class="col-lg-12 text-center">
+      <font color="green"><h2 class="section-heading text-uppercase">Talk to Pok !</h2></font>
+  </div>
+</div>
+
+<br/>
+<br/>
+
+{% include 'core_nlp/includes/conversation_bot_basic.html' %}
+
+
+{% endblock %}

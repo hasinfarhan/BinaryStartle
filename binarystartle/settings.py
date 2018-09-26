@@ -116,6 +116,10 @@ USE_L10N = True
 USE_TZ = True
 
 
+SESSION_ENGIN='django.contrib.sessions.backends.signed_cookies'
+SESSION_COOKIE_HTTPONLY= True
+
+
 
 
 STATIC_URL = '/static/'

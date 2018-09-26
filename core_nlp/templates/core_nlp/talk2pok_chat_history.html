@@ -1,0 +1,22 @@
+{% extends 'anchor/base.html' %}
+
+{% block generalcontent %}
+
+
+<div class="row">
+  <div class="col-lg-12 text-center">
+      <font color="green"><h2 class="section-heading text-uppercase">Chat History</h2></font>
+  </div>
+  <br />
+  <br />
+  {% for i in chathistory %}
+      {{i}}
+      <br/>
+  {% endfor %}
+</div>
+
+<br/>
+<br/>
+
+
+{% endblock %}

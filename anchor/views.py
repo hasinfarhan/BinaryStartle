@@ -9,3 +9,6 @@ def index(request):
     gdrive=DriveApi()
     content=gdrive.basicDownloadToString('hello.txt').split('\n')
     return render(request,'anchor/landing.html',{'content_0':content})
+
+def forbidden_message(request):
+    return render(request,'anchor/includes/forbidden_msg.html')
