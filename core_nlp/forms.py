@@ -3,30 +3,6 @@ from django.core.exceptions import ValidationError
 
 
 
-def ForbiddenWOrdValidator(value):
-    forbidden_words = ['admin', 'settings', 'news', 'about', 'help',
-                           'signin', 'signup', 'signout', 'terms', 'privacy',
-                           'cookie', 'new', 'login', 'logout', 'administrator',
-                           'join', 'account', 'username', 'root', 'blog',
-                           'user', 'users', 'billing', 'subscribe', 'reviews',
-                           'review', 'blog', 'blogs', 'edit', 'mail', 'email',
-                           'home', 'job', 'jobs', 'contribute', 'newsletter',
-                           'shop', 'profile', 'register', 'auth',
-                           'authentication', 'campaign', 'config', 'delete',
-                           'remove', 'forum', 'forums', 'download',
-                           'downloads', 'contact', 'blogs', 'feed', 'feeds',
-                           'faq', 'intranet', 'log', 'registration', 'search',
-                           'explore', 'rss', 'support', 'status', 'static',
-                           'media', 'setting', 'css', 'js', 'follow',
-                           'activity', 'questions', 'articles', 'network', ]
-
-    if value.lower() in forbidden_words:
-        raise ValidationError('This is a reserved word.')
-
-
-
-
-
 class BasicBotConversationForm(forms.Form):
 
     usertext=forms.CharField(
@@ -42,8 +18,16 @@ class BasicBotConversationForm(forms.Form):
         )
     def __init__(self, *args, **kwargs):
         super(BasicBotConversationForm, self).__init__(*args, **kwargs)
-        #self.fields['usertext'].validators.append(ForbiddenWOrdValidator)
+
 
     def clean(self):
         super(BasicBotConversationForm, self).clean()
+
+        utx=self.cleaned_data.get('usertext')
+        btx=self.cleaned_data.get('bottext')
+
+        if not utx:
+            raise forms.ValidationError("Say something first!")
+
+
         return self.cleaned_data

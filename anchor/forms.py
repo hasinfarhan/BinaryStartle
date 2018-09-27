@@ -51,6 +51,13 @@ class BasicLoginForm(forms.Form):
         uid=self.cleaned_data.get('userid')
         pswd=self.cleaned_data.get('password')
 
+        if not uid:
+            raise forms.ValidationError("User id required!")
+
+        if not pswd:
+            raise forms.ValidationError("Password required!")
+
+
         if(' ' in pswd or '\n' in pswd):
             raise forms.ValidationError("Password can't contain newline or space!")
 
@@ -71,13 +78,13 @@ class BasicSignupForm(forms.Form):
     userid=forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control','placeholder':'User Id','autofocus':'autofocus'}),
         max_length=20,
-        required=True,
+        required=False,
         )
 
     password=forms.CharField(
         widget=forms.TextInput(attrs={'class':'form-control','type':'password','placeholder':'Password'}),
         max_length=25,
-        required=True,
+        required=False,
         )
 
     conf_password=forms.CharField(
@@ -98,6 +105,15 @@ class BasicSignupForm(forms.Form):
         cpswd=self.cleaned_data.get('conf_password')
 
         ForbiddenUsernameValidator(uid)
+
+        if not uid:
+            raise forms.ValidationError("User id required!")
+
+        if not pswd:
+            raise forms.ValidationError("Password required!")
+
+        if not cpswd:
+            raise forms.ValidationError("Confirm password!")
 
         if pswd!=cpswd:
             raise forms.ValidationError("Sorry, the passwords didn't match!")

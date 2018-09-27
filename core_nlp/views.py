@@ -15,27 +15,29 @@ from anchor.models import BasicProfile
 
 
 def index(request):
+    if not request.POST:
+        return render(request,'core_nlp/talk2pok.html',{'basic_bot_conversation_form':BasicBotConversationForm()})
+
     oldBasicBotConversationForm=BasicBotConversationForm(request.POST)
     newBasicBotConversationForm=BasicBotConversationForm()
-    userid=''
-    if 'basicid' in request.session:
-        userid=request.session['basicid']
-    bot=TokProcess(userid)
+
     usertext=""
     bottext=""
 
     if oldBasicBotConversationForm.is_valid():
         usertext=oldBasicBotConversationForm.cleaned_data.get('usertext')
     else:
-        print("oldBasicBotConversationForm.errors")
-        print(oldBasicBotConversationForm.errors)
+        return render(request,'core_nlp/talk2pok.html',{'basic_bot_conversation_form':oldBasicBotConversationForm})
 
-    if usertext!="":
-        bottext=bot.generateReply(usertext)
-
+    userid=''
+    if 'basicid' in request.session:
+        userid=request.session['basicid']
+    bot=TokProcess(userid,usertext)
+    bottext=bot.generateReply()
     newBasicBotConversationForm.fields['bottext'].initial=bottext
-
     return render(request,'core_nlp/talk2pok.html',{'basic_bot_conversation_form':newBasicBotConversationForm})
+
+
 
 
 
